@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<nav class="navbar" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <form class="d-flex" role="search">
+        <input autocomplete="off" name="q" class="form-control me-2" type="search" placeholder="Bitte etwas eingeben..." aria-label="Search" style="background-color: #e3f2fd;">
+        <button class="btn btn-sm btn-outline-secondary" type="submit">Suche</button>
+      </form>
+      <span style="float:right">
+        <a href="{% url 'logout' %}">Log Out</a> <span style="text-transform:uppercase;">  {{ user.username }}</span>
+        </span>
+    </div>
+  </nav>
+
+
+
+</br>
+
+
+</br>
+  <!DOCTYPE html>
+<html lang="de">
+
+<style>
+    .iframe1 {
+        padding-top: 936px;
+        position: relative;
+    }
+    .iframe1 iframe {
+        border: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    ::-webkit-scrollbar {
+        width: 13px;
+    }
+    ::-webkit-scrollbar-track {
+        margin-top: 0px;
+        margin-bottom: 60px;
+        background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #e3f2fd;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #e3f2fd;
+    }
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+    }
+    textarea {
+        overflow:hidden;
+    }
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyWork</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin: 0px;
+        }
+        header {
+            background-color: rgb(172, 253, 216);
+            display: flex;
+            padding-left: 20px;
+            color: black;
+        }
+
+
+        .list-item {
+            background-color: white;
+            height: 60px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        input[type=text] { border:none; }
+
+        .column {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .column {
+    width: 50%;
+  }
+}
+
+
+
+
+.modal-backdrop.in {
+background: rgba(0, 0, 0, 0.5);
+}
+
+
+
+    </style>
+
+    
+</head>
+<meta name="viewport" content="width=500">
+
+<body>
+    <header>
+     
+    </header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  
+
+  
+
+
+
+
+
+
+
+    {% for row in all_items %}
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><font style="font-size: 17px">{{row.name}}</font></h5>
+          <p class="card-text"><font style="font-size: 14px">{{row.beschreibung|truncatechars:60}}</font></p>
+        </br>
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#{{row.name}}">Lesen</button>
+          <div class="container">
+          <!-- Modal -->
+          <div class="modal fade" id="{{row.name}}" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p><b>{{row.name}}</b></p></br>
+                  <p>{{row.beschreibung|linebreaksbr}}</p>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+    </div>
+    </div></br>
+    {% endfor %}
+
+
+
+
+       
+</body>
+</html>
+
+{% else %}
+
+  <p>Bitte einloggen!</p>
+  <meta http-equiv="refresh" content="1; URL={% url 'login' %}" />
+{% endif %}
+{% endblock %}
