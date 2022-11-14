@@ -20,7 +20,7 @@
 <nav class="navbar" style="background-color: #b2dbf8;">
     <div class="container-fluid">
       <form class="d-flex" role="search">
-        <input autocomplete="off" name="q" class="form-control me-2" type="search" placeholder="Bitte etwas eingeben..." aria-label="Search" style="background-color: #e3f2fd;">
+        <input autocomplete="off" name="p" class="form-control me-2" type="search" placeholder="Bitte etwas eingeben..." aria-label="Search" style="background-color: #e3f2fd;">
         <button class="btn btn-sm btn-outline-secondary" type="submit">Suche</button>
       </form><font style="font-size:11px">
       <span style="float:right">
@@ -35,8 +35,8 @@
 
   <nav id="secondnav" class="navbar bg-light">
     <form class="container-fluid justify-content-start">
-      <button onclick="window.location.href = '/mylist/';" class="btn btn-outline-primary btn-xs" type="button">Öffentlich</font></button>
-      <button onclick="window.location.href = '/private/';" class="btn btn-outline-secondary btn-xs" type="button">Privat</button>
+      <button onclick="window.location.href = '/mylist/';" class="btn btn-outline-secondary btn-xs" type="button">Öffentlich</button>
+      <button onclick="window.location.href = '/private/';" class="btn btn-outline-primary btn-xs" type="button">Privat</button>
       <button class="btn btn-outline-secondary btn-xs" type="button">To-Do's</button>
       <button class="btn btn-outline-secondary btn-xs" type="button">Nachrichten</button>
     </form>
@@ -60,14 +60,14 @@
         <div class="modal-body">
           <p><b><font style="font-size: 15px; color:blue">Neuer Eintrag:</font></b></p></br>
           <p style="margin:0;"><font style="font-size: 9px; color:blue">Name:</font></p>
-          <p><input id="addname" autocomplete="off" type="text" class="border border-dark" style="width: 70%;"></p>
+          <p><input id="addname" autocomplete="off" type="text" class="border border-dark" style="width: 300px;"></p>
 
         <p><p style="margin:0;"><font style="font-size: 9px; color:blue">Beschreibung:</font></p>
-        <p><textarea id="addbeschreibung" name="Text1" rows="15" style="width: 90%;"></textarea></p>
+        <p><textarea id="addbeschreibung" name="Text1" cols="55" rows="15"></textarea></p>
 
 
         <p style="margin:0;"><font style="font-size: 9px; color:blue">Tags:</font></p>
-        <p><input id="addtag" autocomplete="off" type="text" class="border border-dark" style="width: 70%;" value=""></p>
+        <p><input id="addtag" autocomplete="off" type="text" class="border border-dark" style="width: 250px;" value=""></p>
 
 
         </div>
@@ -104,7 +104,7 @@ function sleep(milliseconds) {
       let ItemName = document.getElementById("addname").value;
       let ItemBeschreibung = document.getElementById("addbeschreibung").value;
       let ItemTag = document.getElementById("addtag").value;
-      let ItemPublic = 'public';
+      let ItemPublic = 'private';
       let ItemUserid = '{{ user.id }}'
       let token = '{{ csrf_token }}';
       let formData = new FormData();
@@ -259,7 +259,8 @@ background: rgba(0, 0, 0, 0.5);
 
 
     {% for row in all_items.all.reverse|slice:"::-1"|slice:":15" %}
-      {% if row.public == "public" %}
+
+
             <div class="scrollspy-example p-3 rounded-2">
             <div class="card-body" style="background-color: #f0f6fb;">
             <h5 class="card-title"><b><font style="font-size: 17px">{{row.name}}</font></b></h5>
@@ -269,7 +270,7 @@ background: rgba(0, 0, 0, 0.5);
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{row.name|slugify}}">Lesen</button>
             <p style="font-size: 11px; margin: 0px" align='right'>User: <font style="color: blue">{{ row.author|capfirst }}</font></p>
             <p style="font-size: 9px; margin: 0px" align='right'><font style="color: rgb(107, 107, 107)">{{ row.created_at }}</font></p>
-            <p style="font-size: 9px; margin: 0px" align='right'><font style="color: rgb(59, 192, 68)">{{ row.public|capfirst }}</font></p>
+            <p style="font-size: 9px; margin: 0px" align='right'><font style="color: red">{{ row.public|capfirst }}</font></p>
             <div class="container">
             <!-- Modal -->
             <div class="modal fade" id="{{row.name|slugify}}" role="dialog">
@@ -294,7 +295,8 @@ background: rgba(0, 0, 0, 0.5);
             </div>
             </div>
             </div></br>
-      {% endif %}
+
+
     {% endfor %}
 
 

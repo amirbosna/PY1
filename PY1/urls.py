@@ -18,10 +18,15 @@ from django.urls import path
 from mylist.views import mylist
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from django.urls import path
+from mylist import views
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path('mylist/', mylist),
     path('', mylist),
+    path('private/', views.private, name='private')
 ]
