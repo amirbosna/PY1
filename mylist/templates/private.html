@@ -3,87 +3,128 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+
 {% if user.is_authenticated %}
 
+
 <style>
-.navbar {
-   margin-top: 0px;
-}
-
-#secondnav {
-  margin-top: -20px;
-}
-</style>
-
-
-
-<nav class="navbar" style="background-color: #b2dbf8;">
-    <div class="container-fluid">
-      <form class="d-flex" role="search">
-        <input autocomplete="off" name="p" class="form-control me-2" type="search" placeholder="Bitte etwas eingeben..." aria-label="Search" style="background-color: #e3f2fd;">
-        <button class="btn btn-sm btn-outline-secondary" type="submit">Suche</button>
-      </form><font style="font-size:11px">
-      <span style="float:right">
-        <a href="{% url 'logout' %}">Log Out</a> <span style="text-transform:uppercase;">  {{ user.username }}</span>
-        </span>
-      </font>
+  .navbar {
+     margin-top: 0px;
+  }
+  
+  #secondnav {
+    margin-top: -20px;
+  }
+  
+  
+    .row {
+      display: flex; /* equal height of the children */
+      border: none;
+    }
+    
+    .col {
+      flex: 1; /* additionally, equal width */
+      
+      padding: 1em;
+      border: none;
+    }
+    
+      .not-visible{
+        display: none;
+      }
+  </style>
+  
+  
+  
+  
+  
+  <div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent" style="background-color: #b2dbf8; margin:0px; border:none">
+      <div class="" style="background-color: #b2dbf8; margin:0px; border:none">
+      </br>
+        <center>
+          <a href="{% url 'logout' %}">
+            <button class="btn btn-outline-secondary pull-right" type="button"><font style="color:red">LOG OUT</font></button>
+            </a>
+        <button class="btn btn-outline-secondary pull-right"type="button" onclick="window.location.href = '/private/';">PRIVAT</button>
+        <button class="btn btn-outline-secondary pull-right" type="button" onclick="window.location.href = '/mylist/';">ÖFFENTLICH</button>
+      </center>
+  
+  
+  
+    </br>  </br>
+  
+  
+  
+  </div></div></div>
+  
+  <style>
+    .form-control {
+    box-shadow: 0 0 2px rgba(108, 108, 108, 0.621) !important;
+  }
+  .form-control:focus {
+    border-color: #b2dbf8 !important;
+    box-shadow: 0 0 10px #7fc7fa !important;
+  }
+  
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div style="background-color: #b2dbf8">
+  
+  
+  
+  
+  
+  
+  </br>
+  
+  <button style="font-size: 27px; margin-left: 5px" class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent">
+    ☰
+    </button>
+    <a href="{% url 'mylist' %}">
+      <button style="font-size: 15px; margin-left: 3px; margin-top: 8px" class="navbar-toggler pull-left" type="button" data-target="#"  data-toggle="collapse" data-target="">
+        STARTSEITE
+        </button>
+      </a>
+    <a href="{% url 'add_post' %}">
+    <button style="font-size: 31px; margin-top: -3px; margin-right: 5px" class="navbar-toggler pull-right" type="button"  data-target="#" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      +
+    </button>
+  </a>
+<div class="container">
+</br></br>
     </div>
-  </nav>
-
-
-
-
-  <nav id="secondnav" class="navbar bg-light">
-    <form class="container-fluid justify-content-start">
-      <button onclick="window.location.href = '/mylist/';" class="btn btn-outline-secondary btn-xs" type="button">Öffentlich</button>
-      <button onclick="window.location.href = '/private/';" class="btn btn-outline-primary btn-xs" type="button">Privat</button>
-      <button class="btn btn-outline-secondary btn-xs" type="button">To-Do's</button>
-      <button class="btn btn-outline-secondary btn-xs" type="button">Nachrichten</button>
-    </form>
-  </nav>
-
-
-
-
-  <span style="float:right">
-          <!-- Trigger the modal with a button -->
-          <button style="line-height: 0px; overflow: hidden; height: 33px; border: 0px solid; padding: 5px 10px; font-size: 15px; margin-right: 11px; " type="button" class="btn btn-primary active" data-toggle="modal" data-target="#myModal">+</button>
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-            
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p><b><font style="font-size: 15px; color:blue">Neuer Eintrag:</font></b></p></br>
-          <p style="margin:0;"><font style="font-size: 9px; color:blue">Name:</font></p>
-          <p><input id="addname" autocomplete="off" type="text" class="border border-dark" style="width: 300px;"></p>
-
-        <p><p style="margin:0;"><font style="font-size: 9px; color:blue">Beschreibung:</font></p>
-        <p><textarea id="addbeschreibung" name="Text1" cols="55" rows="15"></textarea></p>
-
-
-        <p style="margin:0;"><font style="font-size: 9px; color:blue">Tags:</font></p>
-        <p><input id="addtag" autocomplete="off" type="text" class="border border-dark" style="width: 250px;" value=""></p>
-
-
-        </div>
-        <div class="modal-footer">
-          <button onclick="addItem()" type="button" class="btn btn-default" data-dismiss="modal">Speichern</button>
-
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-  </span>
-
-
+  </div>
+</div>
+</br>
+</div>
+  
+  
+  <div class="search" style="margin-left:10px; margin-right:10px">
+  <i class="fa fa-search"></i>
+  <form class="d-flex" role="search">
+  <input type="text" autocomplete="off" class="form-control" name="p" placeholder="Du suchst etwas? Gib' es ein...">
+  <button class="btn btn-primary" type="submit">Suche</button>
+  </form>
+  </div>
+  
+  
+  
+  
+  </br>
+  
 
   <script>
 
@@ -104,7 +145,7 @@ function sleep(milliseconds) {
       let ItemName = document.getElementById("addname").value;
       let ItemBeschreibung = document.getElementById("addbeschreibung").value;
       let ItemTag = document.getElementById("addtag").value;
-      let ItemPublic = 'private';
+      let ItemPublic = 'public';
       let ItemUserid = '{{ user.id }}'
       let token = '{{ csrf_token }}';
       let formData = new FormData();
@@ -252,60 +293,100 @@ background: rgba(0, 0, 0, 0.5);
   <body>
   
 
-  
 
 
 
 
 
-    {% for row in all_items.all.reverse|slice:"::-1"|slice:":15" %}
+
+    {% for posts in posts %}
 
 
-            <div class="scrollspy-example p-3 rounded-2">
-            <div class="card-body" style="background-color: #f0f6fb;">
-            <h5 class="card-title"><b><font style="font-size: 17px">{{row.name}}</font></b></h5>
-            <p class="card-text"><font style="font-size: 14px">{{row.beschreibung|linebreaksbr|truncatechars:60|urlize}}</font></p>
-            </br>
-            <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{row.name|slugify}}">Lesen</button>
-            <p style="font-size: 11px; margin: 0px" align='right'>User: <font style="color: blue">{{ row.author|capfirst }}</font></p>
-            <p style="font-size: 9px; margin: 0px" align='right'><font style="color: rgb(107, 107, 107)">{{ row.created_at }}</font></p>
-            <p style="font-size: 9px; margin: 0px" align='right'><font style="color: red">{{ row.public|capfirst }}</font></p>
-            <div class="container">
-            <!-- Modal -->
-            <div class="modal fade" id="{{row.name|slugify}}" role="dialog">
-             <div class="modal-dialog">
-            
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p><b>{{row.name}}</b></p></br>
-                  <p>{{row.beschreibung|linebreaksbr|urlize}}</p>
-                </div>
-                <div class="modal-footer">
+    <div class="single_content">
+      <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
+            <div class="card-body" style="background-color: #ffffff;">
+              <div class="row" style="margin-left:-5px">
+              <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#65b7fb"  width="30" height="25" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
+                <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/>
+                <text x="22%" y="50%" stroke="#000" stroke-width="0.001px" dy="5px">{{ posts.author|capfirst|slice:":1"  }}</text>
+              </svg>
+            </div>
+            <div style="margin-left:1px; margin-top:-1px">
+                <p style="font-size: 11px; margin: 0px" align='left'><font style="color: #37a3fc; margin: 0px">{{ posts.author|capfirst }}</font>
+                
+                  {% if posts.public == 'public' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#808080" width="12" height="12" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                  </svg>
+                  {% endif %}
+                  {% if posts.public == 'private' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#808080" width="12" height="12" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                  </svg>
+                  {% endif %}
+                
+                
+                
+                </p>
+                <p style="font-size: 9px; margin: 0px" align='left'><font style="color: rgba(107, 107, 107, 0.679)">{{ posts.created_at }}</font>
 
-                </div>
+
+                </p>
+
               </div>
-              
-             </div>
-             </div>
             </div>
-            </div>
-            </div></br>
+            <hr style="height: 1px;background: #dceefc;margin: 2px 0;margin-left:-11px; width:150px">
+                <h5 class="card-title"><b><font style="font-size: 15px;"><u><a style="color:rgb(8, 0, 255)" href="{% url 'article-detail' posts.pk %}">{{posts.name}}</a></u></font></b></h5>
+              </br>
+            <p class="card-text"><font style="font-size: 14px">{{posts.beschreibung|linebreaksbr|truncatechars:100|urlize}}</font></p>
+          
 
+            </div>
+            </div>
 
     {% endfor %}
 
 
 
 
-       
-</body>
-</html>
 
+
+
+
+
+
+
+
+<center>
+        <ul class="pagination">
+            {% if posts.has_previous %}
+            <li class="page-item">
+                <a href="?page={{ posts.previous_page_number }}" class="page-link">< Zurück</a>
+            </li>
+            {% endif %}
+            {% if posts.has_next %}
+            <li class="page-item">
+                <a href="?page={{posts.next_page_number}}" class="page-link">Nächste Seite ></a>
+            </li>
+            {% endif %}
+        </ul> 
+    </div>
+  </center>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
 {% else %}
 <!DOCTYPE html>
 <html lang="en">

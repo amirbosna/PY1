@@ -1,0 +1,508 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == id.author_id or id.public == 'public' %}
+
+
+
+<style>
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+  .navbar {
+     margin-top: 0px;
+  }
+  
+  #secondnav {
+    margin-top: -20px;
+  }
+  
+  
+    .row {
+      display: flex; /* equal height of the children */
+      border: none;
+    }
+    
+    .col {
+      flex: 1; /* additionally, equal width */
+      
+      padding: 1em;
+      border: none;
+    }
+    
+      .not-visible{
+        display: none;
+      }
+  </style>
+  
+  
+  
+  
+  
+  <div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent" style="background-color: #b2dbf8; margin:0px; border:none">
+      <div class="" style="background-color: #b2dbf8; margin:0px; border:none">
+      </br>
+        <center>
+          <a href="{% url 'logout' %}">
+            <button class="btn btn-outline-secondary pull-right" type="button"><font style="color:red">LOG OUT</font></button>
+            </a>
+        <button class="btn btn-outline-secondary pull-right"type="button" onclick="window.location.href = '/private/';">PRIVAT</button>
+        <button class="btn btn-outline-secondary pull-right" type="button" onclick="window.location.href = '/mylist/';">ÖFFENTLICH</button>
+      </center>
+  
+  
+  
+    </br>  </br>
+  
+  
+  
+  </div></div></div>
+  
+  <style>
+    .form-control {
+    box-shadow: 0 0 2px rgba(108, 108, 108, 0.621) !important;
+  }
+  .form-control:focus {
+    border-color: #b2dbf8 !important;
+    box-shadow: 0 0 10px #7fc7fa !important;
+  }
+  
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div style="background-color: #b2dbf8">
+  
+  
+  
+  
+  
+  
+  </br>
+  
+    <button style="font-size: 27px; margin-left: 5px" class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent">
+      ☰
+      </button>
+      <a href="{% url 'mylist' %}">
+        <button style="font-size: 15px; margin-left: 3px; margin-top: 8px" class="navbar-toggler pull-left" type="button" data-target="#"  data-toggle="collapse" data-target="">
+          STARTSEITE
+          </button>
+        </a>
+      <a href="{% url 'add_post' %}">
+      <button style="font-size: 31px; margin-top: -3px; margin-right: 5px" class="navbar-toggler pull-right" type="button"  data-target="#" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        +
+      </button>
+    </a>
+  <div class="container">
+  </br></br>
+      </div>
+    </div>
+  </div>
+  </br>
+  </div>
+  
+  
+  
+  
+
+  
+    <script>
+  
+  
+  function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+  
+  
+      function addItem(){
+        if (document.getElementById("addname").value == "" || document.getElementById("addbeschreibung").value == "") {
+          window.alert("Die Felder Name und Beschreibung dürfen nicht leer sein!");
+        } else {
+        let ItemName = document.getElementById("addname").value;
+        let ItemBeschreibung = document.getElementById("addbeschreibung").value;
+        let ItemTag = document.getElementById("addtag").value;
+        let ItemPublic = 'public';
+        let ItemUserid = '{{ user.id }}'
+        let token = '{{ csrf_token }}';
+        let formData = new FormData();
+        formData.append('itemName', ItemName);
+        formData.append('itemBeschreibung', ItemBeschreibung);
+        formData.append('itemTag', ItemTag);
+        formData.append('itemPublic', ItemPublic);
+        formData.append('itemUserid', ItemUserid);
+        formData.append('csrfmiddlewaretoken', token);
+        fetch('/mylist/', {
+          method: 'POST',
+          body: formData
+        })
+        sleep(600);
+        location.reload();
+      }
+    }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+  <!DOCTYPE html>
+<html lang="de">
+
+<style>
+    .iframe1 {
+        padding-top: 936px;
+        position: relative;
+    }
+    .iframe1 iframe {
+        border: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    ::-webkit-scrollbar {
+        width: 13px;
+    }
+    ::-webkit-scrollbar-track {
+        margin-top: 0px;
+        margin-bottom: 60px;
+        background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #e3f2fd;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #e3f2fd;
+    }
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+    }
+    textarea {
+        overflow:hidden;
+    }
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <title>EasyWork</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin: 0px;
+        }
+        header {
+            background-color: rgb(172, 253, 216);
+            display: flex;
+            padding-left: 20px;
+            color: black;
+        }
+
+
+        .list-item {
+            background-color: white;
+            height: 60px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        input[type=text] { border:none; }
+
+        .column {
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .column {
+    width: 50%;
+  }
+}
+
+
+
+
+.modal-backdrop.in {
+background: rgba(0, 0, 0, 0.5);
+}
+
+
+
+    </style>
+
+    
+</head>
+<meta name="viewport" content="width=500">
+
+<body>
+    <header>
+     
+    </header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  
+    <style>
+        .row {
+          display: flex; /* equal height of the children */
+          padding: 0em;
+          border: none;
+        }
+        
+        .col {
+          flex: 1; /* additionally, equal width */
+          
+          padding: 0em;
+          border: none;
+        }
+/* Blue */
+.info {
+  background-color: #ffffff;
+  border-color: #76c2f8;
+  color: #76c2f8;
+}
+.info:hover {
+  background: #2196F3;
+  color: white;
+}
+          </style>
+  
+
+
+
+
+
+  <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
+    <div class="card-body" style="background-color: #ffffff;">
+      <div class="row" style="margin-left:-5px">
+      <div>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="#65b7fb"  width="30" height="25" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
+        <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/>
+        <text x="22%" y="50%" stroke="#000" stroke-width="0.001px" dy="5px">{{ id.author|capfirst|slice:":1"  }}</text>
+      </svg>
+    </div>
+    <div style="margin-left:1px; margin-top:-1px">
+        <p style="font-size: 11px; margin: 0px" align='left'><font style="color: #37a3fc; margin: 0px">{{ id.author|capfirst }}</font>
+        
+          {% if id.public == 'public' %}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#808080" width="12" height="12" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+            <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+          </svg>
+          {% endif %}
+          {% if id.public == 'private' %}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#808080" width="12" height="12" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+          </svg>
+          {% endif %}
+        
+        
+        
+        </p>
+        <p style="font-size: 9px; margin: 0px" align='left'><font style="color: rgba(107, 107, 107, 0.679)">{{ id.created_at }}</font>
+
+
+        </p>
+
+      </div>
+    </div>
+    <hr style="height: 1px;background: #dceefc;margin: 2px 0;margin-left:-11px; width:150px">
+        <h5 class="card-title" style="margin-left:-1px"><b><font style="font-size: 15px;">{{id.name}}</font></b></h5>
+
+    <p class="card-text"><font style="font-size: 14px">{{id.beschreibung|linebreaksbr|urlize}}</font></p>
+  
+
+    </div>
+    </div>
+            <div class="scrollspy-example p-3 rounded-2" style="margin-top: -25px">
+            <div class="card-body">
+            <div class="row">
+            <div class="col">
+              <button href="" style="float: left; margin-left: 3px;" type="button" class="btn btn-secondary glyphicon glyphicon-menu-left btn-sm" onclick="history.back()"></button>
+
+            </div>
+            {% if user.id == id.author_id %}
+            <div class="col" style="margin-top: -50px; margin-right: 7px">
+              <a href="{% url 'delete' id.pk %}">
+                <button style="float: right; margin-left: 5px;" type="button" class="btn btn-secondary btn-outline-danger btn-sm">Löschen</button>
+              </a>
+                <a href="{% url 'edit' id.pk %}">
+                <button href="#" style="float: right;" type="button" class="btn btn-lg btn btn-outline-warning btn-sm">Bearbeiten</button></a>
+            </div>
+            {% endif %}
+            </div></div>
+            </div>
+
+
+
+
+                  <div class="card-body" style="background-color: #ffffff; margin-top: -27px">
+                    <div class="row">
+                      <div class="card-body p-4">
+                        <div class="form-outline mb-4">
+                          <form method="POST">
+                          {% csrf_token %}
+                          {{ form }}<button class="btn info btn-sm" style="margin-top: -35px; float: right; margin-right:10px" type="submit">Senden</button>
+                          </form>
+                        </div>
+                      </br>
+
+                      {% for comment in post_comments %}
+                        <div class="card mb-4" style="margin-top:-12px">
+                          <div class="card-body">
+                          <p>{{comment.content|linebreaksbr|urlize}}</p>
+            
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-row align-items-center">
+
+                              <p style="font-size: 9px; margin: 0px" align='left'><font style="color: #37a3fc; margin: 0px">{{ comment.user|capfirst }}</font>
+                              <p style="font-size: 9px; margin: 0px" align='left'><font style="color: rgba(107, 107, 107, 0.679)"> am {{ comment.date }}</font>
+                            </div>
+                              <div class="d-flex flex-row align-items-center">
+
+                              <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              
+
+
+
+
+{% else %}
+
+
+
+<center>
+  <p style="color:red"><b>Du bist nicht berechtigt, diesen Eintrag zu lesen!</b></p>
+  <script language="JavaScript" type="text/javascript">
+    setTimeout("window.history.go(-1)",1000);
+</script>
+  </center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <title>EasyWork - Login</title>
+</head>
+<body>
+  <center>
+  <p><font style="font-size: 19px; color: red;">Bitte einloggen!</font></p>
+  <p>Sie werden gleich weitergeleitet.</p>
+</center>
+</body>
+</html>
+  <meta http-equiv="refresh" content="1; URL={% url 'login' %}" />
+{% endif %}
+{% endblock %}

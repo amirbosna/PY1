@@ -93,7 +93,11 @@
     <button style="font-size: 27px; margin-left: 5px" class="navbar-toggler pull-left" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent">
       ☰
       </button>
-
+      <a href="{% url 'mylist' %}">
+        <button style="font-size: 15px; margin-left: 3px; margin-top: 8px" class="navbar-toggler pull-left" type="button" data-target="#"  data-toggle="collapse" data-target="">
+          STARTSEITE
+          </button>
+        </a>
       <a href="{% url 'add_post' %}">
       <button style="font-size: 31px; margin-top: -3px; margin-right: 5px" class="navbar-toggler pull-right" type="button"  data-target="#" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         +
@@ -111,7 +115,7 @@
   <div class="search" style="margin-left:10px; margin-right:10px">
   <i class="fa fa-search"></i>
   <form class="d-flex" role="search">
-  <input type="text" autocomplete="off" class="form-control" name="q" placeholder="Du suchst etwas? Gib' es ein...">
+  <input type="text" autocomplete="off" class="form-control" name="p" placeholder="Du suchst etwas? Gib' es ein...">
   <button class="btn btn-primary" type="submit">Suche</button>
   </form>
   </div>
@@ -297,9 +301,10 @@ background: rgba(0, 0, 0, 0.5);
 
     {% for posts in posts %}
 
-      <div class="single_content">
-        <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
-              <div class="card-body" style="background-color: #ffffff;">
+
+    <div class="single_content">
+      <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
+            <div class="card-body" style="background-color: #ffffff;">
               <div class="row" style="margin-left:-5px">
               <div>
               <svg xmlns="http://www.w3.org/2000/svg" fill="#65b7fb"  width="30" height="25" fill="currentColor" class="bi bi-app" viewBox="0 0 16 16">
@@ -332,9 +337,8 @@ background: rgba(0, 0, 0, 0.5);
               </div>
             </div>
             <hr style="height: 1px;background: #dceefc;margin: 2px 0;margin-left:-11px; width:150px">
-            
                 <h5 class="card-title"><b><font style="font-size: 15px;"><u><a style="color:rgb(8, 0, 255)" href="{% url 'article-detail' posts.pk %}">{{posts.name}}</a></u></font></b></h5>
-          </br>
+
             <p class="card-text"><font style="font-size: 14px">{{posts.beschreibung|linebreaksbr|truncatechars:100|urlize}}</font></p>
           
 

@@ -14,11 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from mylist.views import mylist
+from mylist.views import mylist, Detailed, AddPost, UpdatePost, privatelist, DeletePost
 from django.urls import path, include
-from django.views.generic.base import TemplateView
-from django.urls import path
 from mylist import views
 
 
@@ -28,5 +25,13 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path('mylist/', mylist),
     path('', mylist),
-    path('private/', views.private, name='private')
-]
+    path('private/', privatelist),
+    path('article/<int:pk>', Detailed.as_view(), name='article-detail'),
+    path('', mylist, name='mylist'),
+    path('load-more',views.mylist,name='load-more'),
+    path('add_post/', AddPost.as_view(), name='add_post'),
+    path('search/', views.search, name='search'),
+    path('privatesearch/', views.privatesearch, name='privatesearch'),
+    path('edit/<int:pk>', UpdatePost.as_view(), name='edit'),
+    path('article/<int:pk>/delete', DeletePost.as_view(), name='delete'),
+  ]
